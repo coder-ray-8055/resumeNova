@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+    font-family: sans-serif;
+}
+
+.navbar{
+    /* padding-top: 20px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    background-color: #f8fafc;
+    height: 4rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.navbar h1{
+    color: #0f766e;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 1.75rem;
+}
+
+.navbar h1 i{
+    padding-right: 0.25rem;
+    transition: all 0.75s ease;
+}
+.navbar h1 i:hover{
+    transform: translateY(-0.05rem);
+}
+
+
+ul{
+    list-style:  none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding-right: 4rem;
+}
+
+ul li a {
+    text-decoration: none;
+    font-size: 1.25rem;
+}
+
+.body{
+    margin-top: 4rem;
+    height: auto;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.body h1{
+    padding-top: 4.5rem;
+    font-size: 3.6rem;
+}
+
+.color{
+    color: #0f766e;
+}
+
+.body p {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    color: #64748b;
+}
+
+.body button{
+    height: 50px;
+    width: 170px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 2rem;
+    font-size: 1.15rem;
+    background-color: #0f766e;
+    color: white;
+    font-weight: 700;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.body button:hover{
+    transform: translateY(-0.24rem);
+}
+
+.card{
+    height: 250px;
+    width: 300px;
+    background-color: #ffffff;
+}
+
+.cardContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 7.5rem;
+}
+
+.card{
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.card i{
+    font-size: 4rem;
+    padding-top: 1rem;
+}
