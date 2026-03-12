@@ -4,44 +4,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResumeNova</title>
+    <title>ResumeNova — Build Your Perfect Resume</title>
+    <meta name="description" content="Build professional, ATS-friendly resumes in minutes with ResumeNova.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <nav class="navbar">
-        <h1><i class="fa-solid fa-file-lines"></i>ResumeNova</h1>
-        <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Build</a></li>
-        </ul>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="mainNav">
+        <a href="#HomeSec" class="nav-logo">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>ResumeNova</span>
+        </a>
+        <div class="nav-links">
+            <a href="#HomeSec" class="nav-link">Home</a>
+            <a href="#howItWorks" class="nav-link">How It Works</a>
+            <a href="#buildRes" class="nav-link">Build</a>
+            <a href="#buildRes" class="nav-cta-btn"><i class="fa-solid fa-rocket"></i> Get Started</a>
+        </div>
     </nav>
-    <section class="body">
-        <h1>Build Your <span class="color">Perfect Resume</span> in <br> Minutes</h1>
-        <p>Professional, ATS-friendly resumes created with ease. Enter your <br> details and get a polished resume with
-            a live preview.</p>
-        <button>Start Building</button>
 
-        <div class="cardContainer">
-            <div class="card">
-                <i class="fa-solid fa-newspaper"></i>
-                <h4>Easy Form Input</h4>
-                <p>Simple form to enter your details—no complex setup</p>
+    <!-- HERO -->
+    <section class="hero" id="HomeSec">
+        <!-- Animated background orbs -->
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fa-solid fa-bolt"></i>
+                <span>No Sign-up Required · 100% Free · Instant Download</span>
             </div>
-            <div class="card">
-                <i class="fa-solid fa-newspaper"></i>
-                <h4>Easy Form Input</h4>
-                <p>Simple form to enter your details—no complex setup</p>
+
+            <h1 class="hero-title">
+                Build Your <br>
+                <span class="hero-gradient-text">Perfect Resume</span> <br>
+                in Minutes
+            </h1>
+
+            <p class="hero-subtitle">
+                Create professional, ATS-friendly resumes effortlessly. <br>
+                Fill in your details, preview in real-time, and download — all in one page.
+            </p>
+
+            <div class="hero-cta">
+                <button class="btn-primary" onclick="document.getElementById('buildRes').scrollIntoView({behavior:'smooth'})">
+                    <i class="fa-solid fa-rocket"></i> Start Building
+                </button>
+                <a href="#howItWorks" class="btn-ghost">
+                    <i class="fa-solid fa-play-circle"></i> See How It Works
+                </a>
             </div>
-            <div class="card">
-                <i class="fa-solid fa-newspaper"></i>
-                <h4>Easy Form Input</h4>
-                <p>Simple form to enter your details—no complex setup</p>
+
+            <!-- Trust Stats -->
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">10+</span>
+                    <span class="hero-stat-label">Templates</span>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">PDF</span>
+                    <span class="hero-stat-label">Export</span>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">ATS</span>
+                    <span class="hero-stat-label">Friendly</span>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">Live</span>
+                    <span class="hero-stat-label">Preview</span>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section" id="howItWorks">
+        <h2 class="section-heading">How It <span class="color">Works</span></h2>
+        <p class="section-subtitle">Three simple steps to your dream resume</p>
+        <div class="steps-container">
+            <div class="step-card" style="animation-delay: 0.1s">
+                <div class="step-number">01</div>
+                <div class="step-icon"><i class="fa-solid fa-keyboard"></i></div>
+                <h4>Fill In Your Details</h4>
+                <p>Enter your personal info, experience, skills, and projects using our intuitive form</p>
+            </div>
+            <div class="step-connector"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="step-card" style="animation-delay: 0.3s">
+                <div class="step-number">02</div>
+                <div class="step-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h4>Choose a Template</h4>
+                <p>Browse 10 professional templates and switch between them instantly in live preview</p>
+            </div>
+            <div class="step-connector"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="step-card" style="animation-delay: 0.5s">
+                <div class="step-number">03</div>
+                <div class="step-icon"><i class="fa-solid fa-download"></i></div>
+                <h4>Download as PDF</h4>
+                <p>Export your beautifully formatted, ATS-ready resume with a single click</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features-section">
+        <h2 class="section-heading">Why Choose <span class="color">ResumeNova</span></h2>
+        <p class="section-subtitle">Everything you need to create a standout resume</p>
+        <div class="cardContainer">
+            <div class="card">
+                <div class="card-glow"></div>
+                <i class="fa-solid fa-list-check"></i>
+                <h4>Easy Form Input</h4>
+                <p>Simple, intuitive form with smart sections — no complex setup needed</p>
+            </div>
+            <div class="card">
+                <div class="card-glow"></div>
+                <i class="fa-solid fa-eye"></i>
+                <h4>Live Preview</h4>
+                <p>Watch your resume take shape instantly as you type each detail</p>
+            </div>
+            <div class="card">
+                <div class="card-glow"></div>
+                <i class="fa-solid fa-palette"></i>
+                <h4>10 Pro Templates</h4>
+                <p>From classic to creative — find the perfect style for your industry</p>
+            </div>
+            <div class="card">
+                <div class="card-glow"></div>
+                <i class="fa-solid fa-file-pdf"></i>
+                <h4>One-Click PDF</h4>
+                <p>Download a pixel-perfect A4 PDF resume ready for applications</p>
+            </div>
+            <div class="card">
+                <div class="card-glow"></div>
+                <i class="fa-solid fa-robot"></i>
+                <h4>ATS Optimized</h4>
+                <p>Templates designed to pass Applicant Tracking Systems with ease</p>
+            </div>
+            <div class="card">
+                <div class="card-glow"></div>
+                <i class="fa-solid fa-lock-open"></i>
+                <h4>100% Free</h4>
+                <p>No sign-ups, no paywalls, no hidden fees — completely free forever</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BUILDER -->
+    <section class="builder" id="buildRes">
+        <h2><i class="fa-solid fa-hammer"></i> Resume Builder</h2>
+        <div class="buildContainer">
+
+            <!-- LEFT: FORM -->
+            <div class="buildForm">
+                <!-- Personal Info -->
+                <div class="form-section">
+                    <h4><i class="fa-solid fa-user"></i> Personal Information</h4>
+                    <div class="line"></div>
+                    <div class="form-grid">
+                        <div class="input-group"><label for="fullName">Full Name</label><input type="text" id="fullName" placeholder="e.g. David L. Parker"></div>
+                        <div class="input-group"><label for="jobTitle">Job Title</label><input type="text" id="jobTitle" placeholder="e.g. Retail Sales Manager"></div>
+                        <div class="input-group"><label for="email">Email</label><input type="email" id="email" placeholder="e.g. david@email.com"></div>
+                        <div class="input-group"><label for="phone">Phone</label><input type="tel" id="phone" placeholder="e.g. (555) 456-7890"></div>
+                        <div class="input-group"><label for="location">Location</label><input type="text" id="location" placeholder="e.g. Los Angeles, CA"></div>
+                        <div class="input-group"><label for="age">Age</label><input type="number" id="age" placeholder="e.g. 28"></div>
+                    </div>
+                </div>
+                <!-- Social Links -->
+                <div class="form-section">
+                    <h4><i class="fa-solid fa-link"></i> Social Links</h4>
+                    <div class="line"></div>
+                    <div id="socialEntries">
+                        <div class="dynamic-entry">
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label>Platform</label>
+                                    <select class="social-platform">
+                                        <option value="linkedin" selected>LinkedIn</option>
+                                        <option value="github">GitHub</option>
+                                        <option value="twitter">Twitter / X</option>
+                                        <option value="portfolio">Portfolio</option>
+                                        <option value="behance">Behance</option>
+                                        <option value="dribbble">Dribbble</option>
+                                        <option value="other">Other / Custom</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>Username (or full link)</label>
+                                    <input type="text" class="social-username" placeholder="e.g. johndoe">
+                                </div>
+                            </div>
+                            <button class="btn-remove" onclick="removeEntry(this)"><i class="fa-solid fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="addSocialLink()"><i class="fa-solid fa-plus"></i> Add Social Link</button>
+                </div>
+                <!-- Summary -->
+                <div class="form-section">
+                    <h4><i class="fa-solid fa-pen-fancy"></i> Personal Summary</h4>
+                    <div class="line"></div>
+                    <div class="input-group full-width"><label for="summary">Professional Summary</label><textarea id="summary" rows="4" placeholder="Experienced and results-driven professional with..."></textarea></div>
+                </div>
+                <!-- Skills -->
+                <div class="form-section">
+                    <h4><i class="fa-solid fa-star"></i> Skills</h4>
+                    <div class="line"></div>
+                    <div class="input-group full-width"><label for="skills">Skills (comma separated)</label><input type="text" id="skills" placeholder="e.g. Retail Management, Sales Strategy, Customer Service"></div>
+                </div>
+                <!-- Languages -->
+                <div class="form-section">
+                    <h4><i class="fa-solid fa-language"></i> Languages</h4>
+                    <div class="line"></div>
+                    <div class="input-group full-width"><label for="languages">Languages (e.g. English-5, Spanish-3)</label><input type="text" id="languages" placeholder="e.g. English-5, Spanish-3, French-4"></div>
+                </div>
+                <!-- Experience -->
+                <div class="form-section">
+                    <h4><i class="fa-solid fa-briefcase"></i> Work Experience</h4>
+                    <div class="line"></div>
+                    <div id="experienceEntries">
+                        <div class="dynamic-entry">
+                            <div class="form-grid">
+                                <div class="input-group"><label>Job Title</label><input type="text" class="exp-title" placeholder="e.g. Retail Sales Manager"></div>
+                                <div class="input-group"><label>Company</label><input type="text" class="exp-company" placeholder="e.g. Retail Solutions"></div>
+                                <div class="input-group"><label>Location</label><input type="text" class="exp-location" placeholder="e.g. Los Angeles, CA"></div>
+                                <div class="input-group"><label>Start Date</label><input type="text" class="exp-start" placeholder="e.g. 2019-08"></div>
+                                <div class="input-group"><label>End Date</label><input type="text" class="exp-end" placeholder="e.g. 2024-06 or Present"></div>
+                            </div>
+                            <div class="input-group full-width"><label>Responsibilities (one per line)</label><textarea class="exp-responsibilities" rows="3" placeholder="Managed daily operations...&#10;Developed sales strategies..."></textarea></div>
+                            <button class="btn-remove" onclick="removeEntry(this)"><i class="fa-solid fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="addExperience()"><i class="fa-solid fa-plus"></i> Add Experience</button>
+                </div>
+                <!-- Education -->
+                <div class="form-section">
+                    <h4><i class="fa-solid fa-graduation-cap"></i> Education</h4>
+                    <div class="line"></div>
+                    <div id="educationEntries">
+                        <div class="dynamic-entry">
+                            <div class="form-grid">
+                                <div class="input-group"><label>Degree</label><input type="text" class="edu-degree" placeholder="e.g. Bachelor of Science in Business"></div>
+                                <div class="input-group"><label>Institution</label><input type="text" class="edu-institution" placeholder="e.g. University of California"></div>
+                                <div class="input-group"><label>Location</label><input type="text" class="edu-location" placeholder="e.g. Los Angeles, CA"></div>
+                                <div class="input-group"><label>Start Year</label><input type="text" class="edu-start" placeholder="e.g. 2013"></div>
+                                <div class="input-group"><label>End Year</label><input type="text" class="edu-end" placeholder="e.g. 2017"></div>
+                            </div>
+                            <button class="btn-remove" onclick="removeEntry(this)"><i class="fa-solid fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="addEducation()"><i class="fa-solid fa-plus"></i> Add Education</button>
+                </div>
+                <!-- Projects -->
+                <div class="form-section">
+                    <h4><i class="fa-solid fa-diagram-project"></i> Projects</h4>
+                    <div class="line"></div>
+                    <div id="projectEntries">
+                        <div class="dynamic-entry">
+                            <div class="form-grid">
+                                <div class="input-group"><label>Project Name</label><input type="text" class="proj-name" placeholder="e.g. Inventory System"></div>
+                                <div class="input-group"><label>Tech Stack</label><input type="text" class="proj-tech" placeholder="e.g. React, Node.js"></div>
+                                <div class="input-group"><label>Link</label><input type="url" class="proj-link" placeholder="e.g. github.com/project"></div>
+                            </div>
+                            <div class="input-group full-width"><label>Description</label><textarea class="proj-desc" rows="2" placeholder="Built a full-stack inventory management system..."></textarea></div>
+                            <button class="btn-remove" onclick="removeEntry(this)"><i class="fa-solid fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="addProject()"><i class="fa-solid fa-plus"></i> Add Project</button>
+                </div>
+                <!-- Certifications -->
+                <div class="form-section">
+                    <h4><i class="fa-solid fa-certificate"></i> Certifications</h4>
+                    <div class="line"></div>
+                    <div id="certEntries">
+                        <div class="dynamic-entry">
+                            <div class="form-grid">
+                                <div class="input-group"><label>Certification Name</label><input type="text" class="cert-name" placeholder="e.g. Certified Sales Manager"></div>
+                                <div class="input-group"><label>Issuer</label><input type="text" class="cert-issuer" placeholder="e.g. Sales Management Association"></div>
+                                <div class="input-group"><label>Year</label><input type="text" class="cert-year" placeholder="e.g. 2019"></div>
+                            </div>
+                            <button class="btn-remove" onclick="removeEntry(this)"><i class="fa-solid fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="addCertification()"><i class="fa-solid fa-plus"></i> Add Certification</button>
+                </div>
+            </div>
+
+            <!-- RIGHT: LIVE PREVIEW -->
+            <div class="Preview">
+                <div class="preview-toolbar">
+                    <div class="preview-toolbar-left">
+                        <i class="fa-solid fa-eye"></i> <span>Live Preview</span>
+                    </div>
+                    <div class="preview-toolbar-right">
+                        <button class="btn-tpl-nav" id="btnPrevTpl" title="Previous template"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="tpl-selector" id="tplSelector">
+                            <button class="tpl-selector-btn" id="tplSelectorBtn">
+                                <span id="tplCurrentName">Classic</span>
+                                <i class="fa-solid fa-caret-down"></i>
+                            </button>
+                            <div class="tpl-dropdown" id="tplDropdown">
+                                <!-- populated by JS -->
+                            </div>
+                        </div>
+                        <button class="btn-tpl-nav" id="btnNextTpl" title="Next template"><i class="fa-solid fa-chevron-right"></i></button>
+                        <button class="btn-download-preview" id="btnFullScreen" title="Toggle Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                        <button class="btn-download-preview" id="btnDownload" title="Download PDF"><i class="fa-solid fa-download"></i></button>
+                    </div>
+                </div>
+                <div class="preview-canvas" id="previewCanvas">
+                    <!-- Template rendered here by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden render area for PDF -->
+    <div id="templateRenderArea" style="position:absolute;left:-9999px;top:0;"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>
