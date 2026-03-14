@@ -618,7 +618,7 @@ body {
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem
+    gap: 1.25rem
 }
 
 .input-group {
@@ -666,6 +666,32 @@ body {
     color: #94a3b8
 }
 
+.input-group input[type="file"] {
+    padding: .5rem .7rem;
+    background: #fff;
+    border: 1.5px dashed #cbd5e1;
+    color: #64748b;
+    cursor: pointer;
+    font-size: .85rem;
+}
+
+.input-group input[type="file"]::-webkit-file-upload-button {
+    background: linear-gradient(135deg, #0f766e, #0d9488);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    padding: .4rem .8rem;
+    margin-right: .8rem;
+    transition: all .3s;
+}
+
+.input-group input[type="file"]::-webkit-file-upload-button:hover {
+    box-shadow: 0 2px 10px rgba(15, 118, 110, 0.3);
+    transform: translateY(-1px);
+}
+
 .input-group textarea {
     resize: vertical;
     min-height: 70px
@@ -684,6 +710,15 @@ body {
 .dynamic-entry:hover {
     border-color: #0f766e;
     border-style: solid
+}
+
+.dynamic-entry .input-group.full-width {
+    margin-top: 1rem;
+}
+
+.dynamic-entry .btn-remove {
+    margin-top: 1.2rem;
+    padding: .5rem 1rem;
 }
 
 .btn-add {
@@ -709,6 +744,7 @@ body {
     border-color: #0f766e;
     background: rgba(15, 118, 110, 0.04)
 }
+
 
 .btn-remove {
     display: inline-flex;
@@ -972,6 +1008,17 @@ body {
 }
 
 /* ===== TEMPLATE STYLES ===== */
+
+/* Base Template Image Styles */
+.t-pic {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
 /* --- T1: Classic (teal sidebar) --- */
 .t-classic {
