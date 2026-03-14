@@ -69,11 +69,11 @@ function collectData() {
             const platform = e.querySelector('.social-platform').value;
             const username = e.querySelector('.social-username').value;
             if (!username) return null;
-            
+
             let url = '';
             let icon = '';
-            
-            switch(platform) {
+
+            switch (platform) {
                 case 'linkedin': url = `linkedin.com/in/${username}`; icon = 'fa-brands fa-linkedin'; break;
                 case 'github': url = `github.com/${username}`; icon = 'fa-brands fa-github'; break;
                 case 'twitter': url = `twitter.com/${username}`; icon = 'fa-brands fa-twitter'; break;
@@ -423,7 +423,6 @@ function buildDropdown() {
     ).join('');
 }
 
-// ── PDF Download ──
 async function downloadPDF() {
     const btn = document.getElementById('btnDownload');
     btn.classList.add('downloading');
@@ -431,32 +430,81 @@ async function downloadPDF() {
 
     const d = collectData();
     const tpl = TEMPLATES[currentTplIndex];
-    const area = document.getElementById('templateRenderArea');
 
-    // Render at full A4 size for PDF
-    area.innerHTML = `<div style="width:794px;font-family:'Inter',sans-serif;">${tpl.render(d)}</div>`;
+    // ── 1. Nuke all visual properties on CSS-scoping wrappers ──
+    const resetCSS =
+        'margin:0!important;padding:0!important;border:none!important;' +
+        'box-shadow:none!important;transform:none!important;border-radius:0!important;' +
+        'overflow:visible!important;background:transparent!important;' +
+        'display:block!important;width:794px!important;height:auto!important;' +
+        'position:static!important;max-width:none!important;';
 
+    // ── 2. Create isolated container at viewport origin ──
+    const wrap = document.createElement('div');
+    wrap.style.cssText =
+        'position:fixed;left:0;top:0;width:794px;z-index:-1;' +
+        'margin:0;padding:0;border:none;background:transparent;overflow:visible;';
+
+    wrap.innerHTML =
+        `<div class="preview-canvas" style="${resetCSS}">` +
+        `<div class="template-content" style="${resetCSS}">` +
+        tpl.render(d) +
+        `</div></div>`;
+
+    document.body.appendChild(wrap);
+
+    // ── 3. Lock the actual template element ──
+    const tplEl = wrap.querySelector('.template-content').firstElementChild;
+    tplEl.style.cssText +=
+        ';width:794px!important;margin:0!important;min-height:1120px!important;' +
+        'box-sizing:border-box!important;overflow:hidden!important;';
+
+    // ── 4. Wait for fonts + paint ──
     await document.fonts.ready;
-    await new Promise(r => setTimeout(r, 300));
+    await new Promise(r => setTimeout(r, 700));
 
-    const el = area.firstElementChild;
+    const W = 794;
+    const H = tplEl.offsetHeight;
 
     try {
-        await html2pdf().set({
-            margin: 0,
-            filename: `${d.name.replace(/\s+/g, '_')}_resume_${tpl.id}.pdf`,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        }).from(el).save();
+        // ── 5. Capture with html2canvas ──
+        const canvas = await html2canvas(tplEl, {
+            scale: 2,
+            useCORS: true,
+            letterRendering: true,
+            backgroundColor: '#ffffff',
+            width: W,
+            height: H,
+            windowWidth: W,
+            scrollX: 0,
+            scrollY: 0
+        });
+
+        // ── 6. Build PDF with jsPDF — page = exact content size ──
+        const imgData = canvas.toDataURL('image/jpeg', 1.0);
+        const pdfW = 210;
+        const pdfH = pdfW * (canvas.height / canvas.width);
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: [pdfW, pdfH],
+            compress: true
+        });
+
+        pdf.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH);
+        pdf.save(`${d.name.replace(/\s+/g, '_')}_resume_${tpl.id}.pdf`);
+
     } catch (err) {
         console.error('PDF generation failed:', err);
         alert('PDF generation failed. Please try again.');
     }
 
+    // ── 7. Cleanup ──
+    document.body.removeChild(wrap);
     btn.innerHTML = '<i class="fa-solid fa-download"></i>';
     btn.classList.remove('downloading');
-    area.innerHTML = '';
 }
 
 // ── Fullscreen Toggle ──
