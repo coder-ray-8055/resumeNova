@@ -357,6 +357,108 @@ function tplExecutive(d) {
         </div></div>`;
 }
 
+// 11. Neon – dark mode, cyber pink/cyan
+function tplNeon(d) {
+    return `<div class="t-neon">
+        <div class="t-header"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactRow(d)}</div></div>
+        <div class="t-2col">
+            <div>
+                ${d.summary ? `<div class="t-stitle">Profile</div><div class="t-sum">${d.summary}</div>` : ''}
+                ${d.experience.length ? `<div class="t-stitle">Experience</div>${expHTML(d)}` : ''}
+                ${d.education.length ? `<div class="t-stitle">Education</div>${eduHTML(d)}` : ''}
+                ${d.projects.length ? `<div class="t-stitle">Projects</div>${projHTML(d)}` : ''}
+            </div>
+            <div>
+                ${d.skills.length ? `<div class="t-stitle">Skills</div><div>${d.skills.map(s => `<span class="t-skpill">${getTechIcon(s)}${s}</span>`).join('')}</div>` : ''}
+                ${d.languages.length ? `<div class="t-stitle">Languages</div>${langsList(d)}` : ''}
+                ${d.certifications.length ? `<div class="t-stitle">Certifications</div>${certsList(d)}` : ''}
+            </div>
+        </div>
+    </div>`;
+}
+
+// 12. Retro – 90s/Synthwave vibe
+function tplRetro(d) {
+    return `<div class="t-retro">
+        <div class="t-header"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactPlain(d)}</div></div>
+        <div class="t-2col">
+            <div>
+                ${d.summary ? `<div class="t-stitle">Summary</div><div class="t-sum">${d.summary}</div>` : ''}
+                ${d.experience.length ? `<div class="t-stitle">Experience</div>${expHTML(d)}` : ''}
+                ${d.education.length ? `<div class="t-stitle">Education</div>${eduHTML(d)}` : ''}
+                ${d.projects.length ? `<div class="t-stitle">Projects</div>${projHTML(d)}` : ''}
+            </div>
+            <div>
+                ${d.skills.length ? `<div class="t-stitle">Skills</div><div>${d.skills.map(s => `<span class="t-skpill">${getTechIcon(s)}${s}</span>`).join('')}</div>` : ''}
+                ${d.languages.length ? `<div class="t-stitle">Languages</div>${langsList(d)}` : ''}
+                ${d.certifications.length ? `<div class="t-stitle">Certs</div>${certsList(d)}` : ''}
+            </div>
+        </div>
+    </div>`;
+}
+
+// 13. Abstract – asymmetrical, shapes
+function tplAbstract(d) {
+    return `<div class="t-abstract">
+        <div class="t-header"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactRow(d)}</div></div>
+        <div class="t-body">
+            <div class="t-bl">
+                ${d.summary ? `<div class="t-stitle">About</div><div class="t-sum">${d.summary}</div>` : ''}
+                ${d.experience.length ? `<div class="t-stitle">Experience</div>${expHTML(d)}` : ''}
+                ${d.education.length ? `<div class="t-stitle">Education</div>${eduHTML(d)}` : ''}
+                ${d.projects.length ? `<div class="t-stitle">Projects</div>${projHTML(d)}` : ''}
+            </div>
+            <div class="t-br">
+                ${d.skills.length ? `<div class="t-stitle">Skills</div><div>${d.skills.map(s => `<span class="t-sktag">${getTechIcon(s)}${s}</span>`).join('')}</div>` : ''}
+                ${d.languages.length ? `<div class="t-stitle">Languages</div>${langsList(d)}` : ''}
+                ${d.certifications.length ? `<div class="t-stitle">Certifications</div>${certsList(d)}` : ''}
+            </div>
+        </div>
+    </div>`;
+}
+
+// 14. Cyberpunk – high contrast yellow/black
+function tplCyberpunk(d) {
+    return `<div class="t-cyberpunk">
+        <div class="t-header"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactRow(d)}</div></div>
+        <div class="t-2col">
+            <div>
+                ${d.summary ? `<div class="t-stitle">Log Data</div><div class="t-sum">${d.summary}</div>` : ''}
+                ${d.experience.length ? `<div class="t-stitle">Exp Record</div>${expHTML(d)}` : ''}
+                ${d.education.length ? `<div class="t-stitle">Edu Record</div>${eduHTML(d)}` : ''}
+                ${d.projects.length ? `<div class="t-stitle">Dir Projects</div>${projHTML(d)}` : ''}
+            </div>
+            <div>
+                ${d.skills.length ? `<div class="t-stitle">Core Skills</div><div>${d.skills.map(s => `<span class="t-skpill">${getTechIcon(s)}${s}</span>`).join('')}</div>` : ''}
+                ${d.languages.length ? `<div class="t-stitle">Lang Modules</div>${langsList(d)}` : ''}
+                ${d.certifications.length ? `<div class="t-stitle">Certs</div>${certsList(d)}` : ''}
+            </div>
+        </div>
+    </div>`;
+}
+
+// 15. Pop Art – comic book style
+function tplPopArt(d) {
+    return `<div class="t-popart">
+        <div class="t-content-wrapper">
+            <div class="t-header"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactRow(d)}</div></div>
+            <div class="t-2col">
+                <div>
+                    ${d.summary ? `<div class="t-stitle">Who Am I?</div><div class="t-sum">${d.summary}</div>` : ''}
+                    ${d.experience.length ? `<div class="t-stitle">Experience</div>${expHTML(d)}` : ''}
+                    ${d.education.length ? `<div class="t-stitle">Education</div>${eduHTML(d)}` : ''}
+                    ${d.projects.length ? `<div class="t-stitle">Projects</div>${projHTML(d)}` : ''}
+                </div>
+                <div>
+                    ${d.skills.length ? `<div class="t-stitle">Skills</div><div>${d.skills.map(s => `<span class="t-skpill">${getTechIcon(s)}${s}</span>`).join('')}</div>` : ''}
+                    ${d.languages.length ? `<div class="t-stitle">Languages</div>${langsList(d)}` : ''}
+                    ${d.certifications.length ? `<div class="t-stitle">Certs</div>${certsList(d)}` : ''}
+                </div>
+            </div>
+        </div>
+    </div>`;
+}
+
 // ── Template Registry ──
 const TEMPLATES = [
     { id: 'classic', name: 'Classic', badge: 'Popular', render: tplClassic },
@@ -368,7 +470,12 @@ const TEMPLATES = [
     { id: 'professional', name: 'Professional', badge: 'Corporate', render: tplProfessional },
     { id: 'compact', name: 'Compact', badge: 'Dense', render: tplCompact },
     { id: 'tech', name: 'Tech', badge: 'Developer', render: tplTech },
-    { id: 'executive', name: 'Executive', badge: 'Luxury', render: tplExecutive }
+    { id: 'executive', name: 'Executive', badge: 'Luxury', render: tplExecutive },
+    { id: 'neon', name: 'Neon', badge: 'Cyber', render: tplNeon },
+    { id: 'retro', name: 'Retro', badge: '80s', render: tplRetro },
+    { id: 'abstract', name: 'Abstract', badge: 'Art', render: tplAbstract },
+    { id: 'cyberpunk', name: 'Cyberpunk', badge: 'Glitch', render: tplCyberpunk },
+    { id: 'popart', name: 'Pop Art', badge: 'Comic', render: tplPopArt }
 ];
 
 let currentTplIndex = 0;
