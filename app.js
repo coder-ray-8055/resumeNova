@@ -1,6 +1,3 @@
-// ===== ResumeNova App =====
-
-// ── Helpers ──
 function starsHTML(lvl, max = 5) {
     let s = '';
     for (let i = 0; i < max; i++) s += i < lvl ? '★' : '☆';
@@ -57,14 +54,16 @@ function getTechIcon(skill) {
     return icons[n] ? `<i class="${icons[n]}" style="margin-right:4px;"></i>` : '';
 }
 
-// ── Collect form data ──
+let profileImageBase64 = '';
+
 function collectData() {
     const v = id => document.getElementById(id).value;
     return {
+        image: profileImageBase64,
         name: v('fullName') || 'Your Name',
         jobTitle: v('jobTitle') || 'Job Title',
         email: v('email'), phone: v('phone'), location: v('location'), age: v('age'),
-        linkedin: '', github: '', socialMedia: '', // Deprecating fixed fields
+        linkedin: '', github: '', socialMedia: '', 
         socialLinks: [...document.querySelectorAll('#socialEntries .dynamic-entry')].map(e => {
             const platform = e.querySelector('.social-platform').value;
             const username = e.querySelector('.social-username').value;
@@ -110,7 +109,6 @@ function collectData() {
     };
 }
 
-// ── Shared HTML Fragments ──
 function infoSidebar(d, lblColor = '#5eead4') {
     let h = '';
     if (d.email) h += `<div class="t-ilbl">Email</div><div class="t-ival">${d.email}</div>`;
@@ -188,13 +186,10 @@ function contactPlain(d) {
     return h;
 }
 
-// ── 10 Template Renderers ──
-
-// 1. Classic – teal sidebar
 function tplClassic(d) {
     return `<div class="t-classic">
         <div class="t-side">
-            <div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div>
+            ${d.image ? `<img src="${d.image}" class="t-pic">` : ''}<div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div>
             <div class="t-stitle">Personal Info</div>${infoSidebar(d)}
             ${d.skills.length ? `<div class="t-stitle">Skills</div>${skillsList(d)}` : ''}
             ${d.languages.length ? `<div class="t-stitle">Languages</div>${langsList(d)}` : ''}
@@ -208,10 +203,9 @@ function tplClassic(d) {
         </div></div>`;
 }
 
-// 2. Modern – dark header
 function tplModern(d) {
     return `<div class="t-modern">
-        <div class="t-header"><div class="t-hl"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div></div><div class="t-hr">${contactIcons(d)}</div></div>
+        <div class="t-header"><div class="t-hl">${d.image ? `<img src="${d.image}" class="t-pic">` : ''}<div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div></div><div class="t-hr">${contactIcons(d)}</div></div>
         <div class="t-body"><div class="t-bl">
             ${d.summary ? `<div class="t-stitle">Profile</div><div class="t-sum">${d.summary}</div>` : ''}
             ${d.experience.length ? `<div class="t-stitle">Experience</div>${expHTML(d)}` : ''}
@@ -224,10 +218,9 @@ function tplModern(d) {
         </div></div></div>`;
 }
 
-// 3. Minimal – centered header
 function tplMinimal(d) {
     return `<div class="t-minimal">
-        <div class="t-header"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactRow(d)}</div></div>
+        <div class="t-header">${d.image ? `<img src="${d.image}" class="t-pic">` : ''}<div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactRow(d)}</div></div>
         ${d.summary ? `<div class="t-stitle">Summary</div><div class="t-sum">${d.summary}</div>` : ''}
         ${d.experience.length ? `<div class="t-stitle">Experience</div>${d.experience.map(e => `<div class="t-ei"><div class="t-erow"><div class="t-et">${e.title}</div><div class="t-ed">${e.start} — ${e.end}</div></div><div class="t-ec">${e.company}${e.location ? ', ' + e.location : ''}</div>${e.responsibilities.map(r => `<div class="t-er">${r}</div>`).join('')}</div>`).join('')}` : ''}
         ${d.education.length ? `<div class="t-stitle">Education</div>${d.education.map(e => `<div class="t-edi"><div class="t-erow"><div class="t-edeg">${e.degree}</div><div class="t-edd">${e.start} — ${e.end}</div></div><div class="t-edin">${e.institution}${e.location ? ', ' + e.location : ''}</div></div>`).join('')}` : ''}
@@ -240,10 +233,9 @@ function tplMinimal(d) {
         </div></div></div>`;
 }
 
-// 4. Bold – dark sidebar + teal header
 function tplBold(d) {
     return `<div class="t-bold">
-        <div class="t-side"><div class="t-shead"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div></div>
+        <div class="t-side"><div class="t-shead">${d.image ? `<img src="${d.image}" class="t-pic">` : ''}<div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div></div>
         <div class="t-sbody"><div class="t-stitle">Contact</div>${iconRows(d)}
             ${d.skills.length ? `<div class="t-stitle">Skills</div>${d.skills.map((s, i) => `<div class="t-skbar-w"><div class="t-skbar-l">${getTechIcon(s)}${s}</div><div class="t-skbar"><div class="t-skbar-f" style="width:${Math.max(50, 100 - i * 8)}%"></div></div></div>`).join('')}` : ''}
             ${d.languages.length ? `<div class="t-stitle">Languages</div>${langsList(d)}` : ''}
@@ -257,11 +249,10 @@ function tplBold(d) {
         </div></div>`;
 }
 
-// 5. Elegant – navy sidebar, gold accents
 function tplElegant(d) {
     return `<div class="t-elegant">
         <div class="t-side">
-            <div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div>
+            ${d.image ? `<img src="${d.image}" class="t-pic">` : ''}<div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div>
             <div class="t-stitle">Personal Info</div>${infoSidebar(d)}
             ${d.skills.length ? `<div class="t-stitle">Skills</div>${skillsList(d)}` : ''}
             ${d.languages.length ? `<div class="t-stitle">Languages</div>${langsList(d)}` : ''}
@@ -275,10 +266,9 @@ function tplElegant(d) {
         </div></div>`;
 }
 
-// 6. Creative – coral header
 function tplCreative(d) {
     return `<div class="t-creative">
-        <div class="t-header"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactRow(d)}</div></div>
+        <div class="t-header">${d.image ? `<img src="${d.image}" class="t-pic">` : ''}<div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactRow(d)}</div></div>
         <div class="t-body"><div class="t-bl">
             ${d.summary ? `<div class="t-stitle">Profile</div><div class="t-sum">${d.summary}</div>` : ''}
             ${d.experience.length ? `<div class="t-stitle">Experience</div>${expHTML(d)}` : ''}
@@ -291,11 +281,10 @@ function tplCreative(d) {
         </div></div></div>`;
 }
 
-// 7. Professional – gray sidebar, blue accents
 function tplProfessional(d) {
     return `<div class="t-professional">
         <div class="t-side">
-            <div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div>
+            ${d.image ? `<img src="${d.image}" class="t-pic">` : ''}<div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div>
             <div class="t-stitle">Contact</div>${infoSidebar(d)}
             ${d.skills.length ? `<div class="t-stitle">Skills</div>${skillsList(d)}` : ''}
             ${d.languages.length ? `<div class="t-stitle">Languages</div>${langsList(d)}` : ''}
@@ -309,10 +298,9 @@ function tplProfessional(d) {
         </div></div>`;
 }
 
-// 8. Compact – single column
 function tplCompact(d) {
     return `<div class="t-compact">
-        <div class="t-header"><div class="t-hl"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div></div><div class="t-hr">${contactIcons(d)}</div></div>
+        <div class="t-header"><div class="t-hl">${d.image ? `<img src="${d.image}" class="t-pic">` : ''}<div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div></div><div class="t-hr">${contactIcons(d)}</div></div>
         ${d.summary ? `<div class="t-stitle">Summary</div><div class="t-sum">${d.summary}</div>` : ''}
         ${d.experience.length ? `<div class="t-stitle">Experience</div>${d.experience.map(e => `<div class="t-ei"><div class="t-erow"><div class="t-et">${e.title} — ${e.company}</div><div class="t-ed">${e.start} - ${e.end}</div></div>${e.responsibilities.map(r => `<div class="t-er">${r}</div>`).join('')}</div>`).join('')}` : ''}
         ${d.education.length ? `<div class="t-stitle">Education</div>${d.education.map(e => `<div class="t-edi"><div class="t-erow"><div class="t-edeg">${e.degree}</div><div class="t-edd">${e.start} - ${e.end}</div></div><div class="t-edin">${e.institution}${e.location ? ', ' + e.location : ''}</div></div>`).join('')}` : ''}
@@ -323,10 +311,9 @@ function tplCompact(d) {
     </div>`;
 }
 
-// 9. Tech – dark header, monospace accents
 function tplTech(d) {
     return `<div class="t-tech">
-        <div class="t-header"><div class="t-name">${d.name}</div><div class="t-jobt">// ${d.jobTitle}</div><div class="t-contacts">${contactPlain(d)}</div></div>
+        <div class="t-header">${d.image ? `<img src="${d.image}" class="t-pic">` : ''}<div class="t-name">${d.name}</div><div class="t-jobt">// ${d.jobTitle}</div><div class="t-contacts">${contactPlain(d)}</div></div>
         <div class="t-body"><div class="t-bl">
             ${d.summary ? `<div class="t-stitle">/* Summary */</div><div class="t-sum">${d.summary}</div>` : ''}
             ${d.experience.length ? `<div class="t-stitle">/* Experience */</div>${expHTML(d)}` : ''}
@@ -339,11 +326,10 @@ function tplTech(d) {
         </div></div></div>`;
 }
 
-// 10. Executive – charcoal sidebar, burgundy accents
 function tplExecutive(d) {
     return `<div class="t-executive">
         <div class="t-side">
-            <div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div>
+            ${d.image ? `<img src="${d.image}" class="t-pic">` : ''}<div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div>
             <div class="t-stitle">Contact</div>${infoSidebar(d)}
             ${d.skills.length ? `<div class="t-stitle">Skills</div>${skillsList(d)}` : ''}
             ${d.languages.length ? `<div class="t-stitle">Languages</div>${langsList(d)}` : ''}
@@ -357,7 +343,6 @@ function tplExecutive(d) {
         </div></div>`;
 }
 
-// 11. Neon – dark mode, cyber pink/cyan
 function tplNeon(d) {
     return `<div class="t-neon">
         <div class="t-header"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactRow(d)}</div></div>
@@ -377,7 +362,6 @@ function tplNeon(d) {
     </div>`;
 }
 
-// 12. Retro – 90s/Synthwave vibe
 function tplRetro(d) {
     return `<div class="t-retro">
         <div class="t-header"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactPlain(d)}</div></div>
@@ -397,7 +381,6 @@ function tplRetro(d) {
     </div>`;
 }
 
-// 13. Abstract – asymmetrical, shapes
 function tplAbstract(d) {
     return `<div class="t-abstract">
         <div class="t-header"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactRow(d)}</div></div>
@@ -417,7 +400,6 @@ function tplAbstract(d) {
     </div>`;
 }
 
-// 14. Cyberpunk – high contrast yellow/black
 function tplCyberpunk(d) {
     return `<div class="t-cyberpunk">
         <div class="t-header"><div class="t-name">${d.name}</div><div class="t-jobt">${d.jobTitle}</div><div class="t-contacts">${contactRow(d)}</div></div>
@@ -437,7 +419,6 @@ function tplCyberpunk(d) {
     </div>`;
 }
 
-// 15. Pop Art – comic book style
 function tplPopArt(d) {
     return `<div class="t-popart">
         <div class="t-content-wrapper">
@@ -459,7 +440,6 @@ function tplPopArt(d) {
     </div>`;
 }
 
-// ── Template Registry ──
 const TEMPLATES = [
     { id: 'classic', name: 'Classic', badge: 'Popular', render: tplClassic },
     { id: 'modern', name: 'Modern', badge: 'New', render: tplModern },
@@ -480,7 +460,6 @@ const TEMPLATES = [
 
 let currentTplIndex = 0;
 
-// ── Preview Update ──
 function updatePreview() {
     const d = collectData();
     const tpl = TEMPLATES[currentTplIndex];
@@ -512,7 +491,6 @@ function nextTemplate() {
     updatePreview();
 }
 
-// ── Dropdown ──
 function toggleDropdown() {
     document.getElementById('tplDropdown').classList.toggle('open');
 }
@@ -538,7 +516,6 @@ async function downloadPDF() {
     const d = collectData();
     const tpl = TEMPLATES[currentTplIndex];
 
-    // ── 1. Nuke all visual properties on CSS-scoping wrappers ──
     const resetCSS =
         'margin:0!important;padding:0!important;border:none!important;' +
         'box-shadow:none!important;transform:none!important;border-radius:0!important;' +
@@ -546,7 +523,6 @@ async function downloadPDF() {
         'display:block!important;width:794px!important;height:auto!important;' +
         'position:static!important;max-width:none!important;';
 
-    // ── 2. Create isolated container at viewport origin ──
     const wrap = document.createElement('div');
     wrap.style.cssText =
         'position:fixed;left:0;top:0;width:794px;z-index:-1;' +
@@ -560,13 +536,11 @@ async function downloadPDF() {
 
     document.body.appendChild(wrap);
 
-    // ── 3. Lock the actual template element ──
     const tplEl = wrap.querySelector('.template-content').firstElementChild;
     tplEl.style.cssText +=
         ';width:794px!important;margin:0!important;min-height:1120px!important;' +
         'box-sizing:border-box!important;overflow:hidden!important;';
 
-    // ── 4. Wait for fonts + paint ──
     await document.fonts.ready;
     await new Promise(r => setTimeout(r, 700));
 
@@ -574,7 +548,6 @@ async function downloadPDF() {
     const H = tplEl.offsetHeight;
 
     try {
-        // ── 5. Capture with html2canvas ──
         const canvas = await html2canvas(tplEl, {
             scale: 2,
             useCORS: true,
@@ -587,7 +560,6 @@ async function downloadPDF() {
             scrollY: 0
         });
 
-        // ── 6. Build PDF with jsPDF — page = exact content size ──
         const imgData = canvas.toDataURL('image/jpeg', 1.0);
         const pdfW = 210;
         const pdfH = pdfW * (canvas.height / canvas.width);
@@ -608,25 +580,23 @@ async function downloadPDF() {
         alert('PDF generation failed. Please try again.');
     }
 
-    // ── 7. Cleanup ──
     document.body.removeChild(wrap);
     btn.innerHTML = '<i class="fa-solid fa-download"></i>';
     btn.classList.remove('downloading');
 }
 
-// ── Fullscreen Toggle ──
 function toggleFullScreen() {
     const previewEl = document.querySelector('.Preview');
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
         if (previewEl.requestFullscreen) {
             previewEl.requestFullscreen();
-        } else if (previewEl.webkitRequestFullscreen) { /* Safari */
+        } else if (previewEl.webkitRequestFullscreen) {
             previewEl.webkitRequestFullscreen();
         }
     } else {
         if (document.exitFullscreen) {
             document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) { /* Safari */
+        } else if (document.webkitExitFullscreen) {
             document.webkitExitFullscreen();
         }
     }
@@ -646,7 +616,6 @@ function handleFullscreenChange() {
 document.addEventListener('fullscreenchange', handleFullscreenChange);
 document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
 
-// ── Dynamic Entry Management ──
 function attachInputListeners(container) {
     container.querySelectorAll('input, textarea, select').forEach(el => {
         el.addEventListener('input', updatePreview);
@@ -742,30 +711,41 @@ function addCertification() {
     `);
 }
 
-// ── Init ──
 document.addEventListener('DOMContentLoaded', () => {
-    // Build the template dropdown
+    const photoInput = document.getElementById('profilePhoto');
+    if (photoInput) {
+        photoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    profileImageBase64 = event.target.result;
+                    updatePreview();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                profileImageBase64 = '';
+                updatePreview();
+            }
+        });
+    }
+
     buildDropdown();
 
-    // Attach listeners to all form fields
     attachInputListeners(document.querySelector('.buildForm'));
 
-    // Initial preview render
     updatePreview();
 
-    // Template navigation buttons
     document.getElementById('btnPrevTpl').addEventListener('click', prevTemplate);
     document.getElementById('btnNextTpl').addEventListener('click', nextTemplate);
     document.getElementById('tplSelectorBtn').addEventListener('click', toggleDropdown);
     document.getElementById('btnFullScreen').addEventListener('click', toggleFullScreen);
     document.getElementById('btnDownload').addEventListener('click', downloadPDF);
 
-    // Close dropdown on outside click
     document.addEventListener('click', e => {
         if (!e.target.closest('.tpl-selector')) closeDropdown();
     });
 
-    // Navbar shadow
     window.addEventListener('scroll', () => {
         document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 80);
     });
