@@ -750,3 +750,36 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 80);
     });
 });
+
+const EmailSubbtn = document.querySelector(".EmailSub")
+const emailinp = document.querySelector("#emailComm")
+const toast = document.querySelector(".toast")
+const toastmsg = document.querySelector("#toastmsg")
+const toasticon = document.querySelector("#icon")
+let toasttimer;
+
+EmailSubbtn.addEventListener("click" , (e)=>{
+
+    e.preventDefault()
+
+    toast.classList.remove("show"); // reset
+    void toast.offsetWidth; // reflow trick
+
+    toasticon.className = ""
+    
+    if(emailinp.value == ""){
+        toasticon.classList.add("fa-solid" ,  "fa-spinner" , "spin")
+        toastmsg.innerHTML = "Enter Email first"
+    } else{
+        toasticon.classList.add("fa-solid" ,  "fa-circle-check")
+        toastmsg.innerHTML = "Email saved"
+    }
+
+    toast.classList.add("show")
+
+    clearTimeout(toasttimer);
+
+    toasttimer = setTimeout(()=>{
+        toast.classList.remove("show")
+    },3000)
+})

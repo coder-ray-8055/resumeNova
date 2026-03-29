@@ -4077,12 +4077,17 @@ body {
     }
 }
 
+footer{
+    min-height: 200px;
+    background: linear-gradient(180deg, #0c6b63, #084d47);
+}
+
 .footer {
     min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    background: linear-gradient(180deg, #0c6b63, #084d47);
+    background: none;
 }
 
 .logo {
@@ -4195,9 +4200,72 @@ body {
 }
 
 .Social form button:hover{
-    transform: translateY(-3px);
+    transform: translateY(-3px) scale(1.03);
 }
 
 .Social form button i{
     font-size: 16px;
+}
+
+.toast{
+    padding: 20px;
+    background: linear-gradient(180deg, #0c6b63, #084d47);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    font-weight: bolder;
+
+    position: fixed;
+    top: 5rem;
+    right: 2rem;
+
+    opacity: 0;
+    transform: translateX(100%);
+    z-index: 9999;
+    transition: all 0.9s ease;
+}
+
+.toast i{
+    font-size: 20px;
+}
+
+.toast i.spin{
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.toast.show{
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.linee{
+    height: 2px;
+    width: 75%;
+    background-color: #94a3b8;
+
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+.final{
+    display: flex;
+    justify-content: center;
+}
+
+.final p{
+    color: #94a3b8;
+    padding: 10px;
+    font-weight: bold;
 }
